@@ -1,0 +1,9 @@
+1.) Give user superuser privilege if he needs it. If he works only on his own Cron Job this is not necessary.
+2.) By calling crontab -e we create a cron tab file (if we need superuser privilege we can call it using sudo first)
+3.) We can now specify the time for the update ,i.e., every second day at 5 pm translates to (0 17 */2 * *) and the file which we want to be run with its path (./runner.sh 'hello') -> Overall: 0 17 */2 * * ./runner.sh 'hello'
+4.) In the end we can verify that the cronjob is actually working 
+
+
+Source:
+https://www.tutorialspoint.com/unix_commands/crontab.htm
+https://www.sitepoint.com/cron-jobs/
