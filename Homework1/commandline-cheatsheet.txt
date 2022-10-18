@@ -1,0 +1,37 @@
+% create new directory temp/
+mkdir temp/
+
+% change directory to temp/
+cd temp/
+
+% write 'hello world' to file called hello.txt
+
+
+% list all files and folder in the parent folder of /temp
+
+
+% list all currently running processes
+
+
+% kill process with ID 666
+
+
+% write the contents of environment variable $PATH to file path.txt
+
+
+% find file 'hello.txt' in the parent of the current directory
+
+
+% find all .png files in your home directory and subdirectories
+
+
+% Find where the executable of command echo is located
+
+
+% find text 'Select all processes' in the manual of command ps
+
+
+% write the last 20 commands you've executed to file commands.txt
+
+
+
