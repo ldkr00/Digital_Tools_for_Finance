@@ -1,0 +1,3 @@
+execution time of HDF: 0.08615851402282715 seconds
+execution time of Parquet: 0.05113053321838379 seconds
+execution time of Feather: 0.00594782829284668 seconds
