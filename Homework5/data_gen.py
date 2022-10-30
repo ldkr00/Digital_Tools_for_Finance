@@ -10,7 +10,7 @@ def log(path, method, time):
         out.write("execution time of {}: {} seconds\n".format(method, time))
 
 #init vars for data
-rowSize = 1e2
+rowSize = 1e6
 colSize = 5
 column_to_duplicate = 3
 
