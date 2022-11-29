@@ -8,5 +8,5 @@ We focus on the recessions of the last 40 years namely July 1981- November 1982,
 
 ## Group Members
  - Lukas Dekker, 18-737-692
- - Denis Hallulli, 21-739-284
+ - Denis Hallulli, 21-739-529
  - Dominic Krummenacher, 21-713-284
