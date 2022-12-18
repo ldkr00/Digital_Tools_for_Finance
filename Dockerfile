@@ -1,9 +1,9 @@
-FROM python:3.8
+FROM jupyter/base-notebook:latest
 
 COPY . /app
 
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+RUN pip install --prefer-binary -r requirements.txt
 
-CMD ["python3", "digital_tools_project.ipynb"]
+CMD jupyter nbconvert --execute /app/digital_tools_project.ipynb --output-dir /app/
