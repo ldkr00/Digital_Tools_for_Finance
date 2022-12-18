@@ -16,7 +16,7 @@ We focus on the recessions of the last 40 years namely July 1981- November 1982,
  - Start Docker
  - Start Terminal and navigate to the local repo
  - Create Image: docker build -t my-jupyter-notebook .
- - Run Image: docker run -d -p 8888:8888 my-jupyter-notebook
+ - Run Image: docker run -d -p 8888:8888 my-jupyter-notebook start.sh jupyter notebook --NotebookApp.token=''
  - Open a web browser and go to the URL http://localhost:8888
  - Navigate to the notebook and open it
  
