@@ -10,3 +10,13 @@ We focus on the recessions of the last 40 years namely July 1981- November 1982,
  - Lukas Dekker, 18-737-692
  - Denis Hallulli, 21-739-529
  - Dominic Krummenacher, 21-713-284
+
+## How to run the Notebook using Docker:
+ - Clone the Github Repo and store it locally
+ - Start Docker
+ - Start Terminal and navigate to the local repo
+ - Create Image: docker build -t my-jupyter-notebook .
+ - Run Image: docker run -d -p 8888:8888 my-jupyter-notebook
+ - Open a web browser and go to the URL http://localhost:8888
+ - Navigate to the notebook and open it
+ 
