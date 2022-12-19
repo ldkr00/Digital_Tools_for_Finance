@@ -1,0 +1,155 @@
+\documentclass[11pt]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\DeclareMathOperator {\argmin}{argmin}
+
+\author{Lukas Dekker, Denis Hallulli, Dominic Krummenacher}
+\title{Is the Swiss franc a safe haven for US investors during recessions?}
+\setbeamertemplate{navigation symbols}{} 
+\institute[]{Digital Tools for Finance\\ Igor Pozdeev} 
+\date{\today} 
+\bibliographystyle{apalike}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Table of Contents}
+\tableofcontents 
+\end{frame}
+
+\section{Introduction}
+\section{Theoretical Background}
+\section{Results}
+\section{Conclusions}
+\section{References}
+
+\begin{frame}{Introduction}
+\begin{itemize}
+    \item[$Q:$] What is a recession?
+    \item[$A:$] A recession is a period of economic downturn, typically marked by a decline in gross domestic product, high unemployment, and a slowdown in industrial activity. It is a general term used to describe a period of economic weakness or contraction.
+    \item[$Q:$] What are typical effects of a recession?
+    \item[$A:$] Recessions are often accompanied by a decrease in stock prices and an increase in the demand for safe, low-risk investments such as government bonds. Governments and central banks may take steps to stimulate the economy, such as lowering interest rates or increasing government spending, in an effort to combat the recession.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Introduction}
+\begin{itemize}
+    \item[$Q:$] Is there any way one can protect himself against recessions?
+    \item[$A:$] During a recession, investors may look to invest in assets that tend to hold their value or even increase in value during times of economic uncertainty. Examples include government bonds, gold, and other precious metals.  Derivatives, such as futures and options, can be used to hedge against potential losses in the value of an underlying asset. However, no investment strategy is completely risk-free.
+\end{itemize}
+\textbf{Goal:} \textit{Investigate whether the Swiss Franc is a safe haven asset during an economic downturn}.
+\end{frame}
+
+\begin{frame}{Introduction}
+Although there are many recessions, we will investigate 5 major ones:
+\begin{itemize}
+    \item Recession 1: July 1981- November 1982
+    \item Recession 2: July 1990 - March 1991
+    \item Recession 3: March 2001 - November 2001
+    \item Recession 4: December 2007 - June 2009
+    \item Recession 5: February 2020 - April 2020
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Theoretical Background: AR(p) Model}
+The model that will be used to describe our data (time-series) will be an autoregressive (AR) model. The later is a statistical model that uses past values of a time series to predict future values. It is based on the assumption that the current value of a time series is related to its past values, and that this relationship can be used to make predictions about future values. For order $p>0$, AR(p) takes form 
+$$
+X_t=\sum_{i=1}^p \varphi_i X_{t-i}+\varepsilon_t
+$$
+where $\varphi_1, \ldots, \varphi_p$ are the parameters of the model, and $\varepsilon_t$ is white noise.
+\end{frame}
+
+\begin{frame}{Theoretical Background: ADF Test}
+Before applying any time series modelling the most important point is to check if the data is stationary (constant mean and variance over time). This may be done with a test such as \textbf{Augmented Dickey-Fuller test} (ADF test). The latter  type of unit root test, which means that it tests for the presence of a unit root in a time series. In other words, it tests the null hypothesis that the time series has a unit root, meaning that it is not stationary. If the null hypothesis is rejected, it suggests that the time series is stationary.
+\end{frame}
+
+
+\begin{frame}{Theoretical Background: P-Value}
+The validity of the ADF test is checked via the concept of a p-value. Roughly put, it is the probability of obtaining a result that is equal to or more extreme than the observed result, given that a certain hypothesis is true.\par 
+
+We will use it to determine whether the observed result is statistically significant or whether it could have occurred by chance. If the p-value is below 5\%, the result is considered statistically significant and the null hypothesis is rejected. If the p-value is above the threshold, the result is not considered statistically significant and the null hypothesis is not rejected.
+\end{frame}
+
+\begin{frame}{Theoretical Background:  Akaike Information Criterion }
+The Akaike Information Criterion (AIC) is a statistical measure used to compare and evaluate the relative quality of statistical models. It is based on the concept of relative likelihood, which is the probability of the observed data given a particular model.
+
+$$
+AIC = 2k -2\ln(L)
+$$
+where $k$ is the number of parameters in the model, and $L$ is the maximum value of the likelihood function for the model. The likelihood function is a measure of the goodness of fit of the model to the data, with higher values indicating a better fit.
+\end{frame}
+
+\begin{frame}{Theoretical Background:  Correlation}
+Cross-correlation is a statistical measure that is used to evaluate the similarity between two time series. It is a measure of the degree to which the two series are correlated, or how closely they follow each other over time.
+The sample cross-correlation function between the paired samples $X_1, \ldots, X_n$ and $Y_1, \ldots, Y_n$ is:
+$$
+r_k(X, Y)=\frac{\sum\left(X_t-\bar{X}\right)\left(Y_{t-k}-\bar{Y}\right)}{\left[\sum\left(X_t-\bar{X}\right)^2\right]^{1 / 2}\left[\sum\left(Y_t-\bar{Y}\right)^2\right]^{1 / 2}}
+$$
+where the summation is over all indices that make sense.
+\end{frame}
+
+\begin{frame}{Theoretical Background:  Data smoothing}
+A (simple) moving average filter is a type of smoothing filter that is used to remove noise or fluctuations from a time series. It works by calculating the average of a set of consecutive values in the time series, and replacing each value with the average.
+$$\begin{aligned} S M A_{k, \text { next }} & =\frac{1}{k} \sum_{i=n-k+2}^{n+1} p_i \\ & =\frac{1}{k}(\underbrace{p_{n-k+2}+p_{n-k+3}+\cdots+p_n+p_{n+1}}_{\sum_{i=n-k+2}^{n+1} p_i}+\underbrace{p_{n-k+1}-p_{n-k+1}}_{=0}) \\ & =\underbrace{\frac{1}{k}\left(p_{n-k+1}+p_{n-k+2}+\cdots+p_n\right)}_{=S M A_{k, \text { prev }}}-\frac{p_{n-k+1}}{k}+\frac{p_{n+1}}{k} \\ & =S M A_{k, \text { prev }}+\frac{1}{k}\left(p_{n+1}-p_{n-k+1}\right)\end{aligned}$$
+\end{frame}
+
+\begin{frame}{Results}
+\begin{figure}[h]
+\caption{Daily log returns of SPX INDEX and USDCHF over the 5 recessions}
+\centering
+\includegraphics[scale=0.2]{output.png}
+\end{figure}
+\end{frame}
+\begin{frame}{Results}
+\begin{figure}[h]
+\caption{Smoothed daily log returns of SPX INDEX and USDCHF using Moving Avg Filter}
+\centering
+\includegraphics[scale=0.2]{smoothed.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Results}
+P-Values of Augmented Dickey-Fuller test for testing stationarity of data
+\begin{table}[h!]
+\centering
+\resizebox{\columnwidth}{!}{
+ \begin{tabular}{||c c c c c c ||} 
+ \hline
+ Asset & Recession 1 & Recession 2 & Recession 3 & Recession 4 & Recession 5\\ [0.5ex] 
+ \hline\hline
+SPX INDEX & 0.023    &    0.069    &    0.079    &    0.002    &    0.043  \\
+ USD/CHF &    0.014    &    0.047    &    0.079    &     0.0     &    0.071 \\ [1ex] 
+ \hline
+ \end{tabular}
+ }
+\end{table}
+\end{frame}
+
+\begin{frame}{Results}
+\begin{figure}[h]
+\caption{Correlation results of each recession between adjusted time series}
+\centering
+\includegraphics[scale=0.3]{corr.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Conclusions}
+When examining the correlation with a lag of zero, we see large differences in the economic significance across the different recessions.
+One possible reason for the lack of consistency observed, may lie in the very nature of the recessions. No two recessions are identical, in their causes or their consequences, and hence the assets that may best protect investors in different recessions may be different. A recession caused by the arrival of a disease that keeps everyone at home is potentially best financially protected from by investing in pharma and technology companies, whereas one caused by inflation may best be weathered by buying gold.
+\end{frame}
+\begin{frame}{References}
+    \begin{itemize}
+        \item Shumway, R.H. and Stoffer, D.S. (2017) Time series analysis and its applications: With R examples. New York: Springer. 
+        \item Team, T.I. (2022) What causes a recession?, Investopedia. Investopedia. Available at: https://www.investopedia.com/ask/answers/08/cause-of-recession.asp. 
+        \item Romer, D. (2021) Advanced macroeconomics. New York, NY: McGraw-Hill Education. 
+        \item Silvey, S.D. (2003) Statistical inference. Boca Raton, FL: Chapman &amp; Hall/CRC. 
+    \end{itemize}
+\end{frame}
+\end{document}
